@@ -15,6 +15,7 @@ namespace Util {
 
 	/* FolderUtils */
 	bool IsDirectory(const std::string& folder);
+	bool IsFile(const std::string& file);
 	std::wstring GetAppDirectoryW();
 	std::string GetAppDirectoryA();
 

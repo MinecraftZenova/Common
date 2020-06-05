@@ -2,6 +2,7 @@
 #include <locale>
 #include <codecvt>
 #include <filesystem>
+#include <iostream>
 
 #include "Utils.h"
 
@@ -25,8 +26,30 @@ namespace Util {
 		return std::wstring(oldstr.begin(), oldstr.end());
 	}
 
+#include <Windows.h>
+	
 	bool IsDirectory(const std::string& folder) {
-		return std::filesystem::is_directory(std::filesystem::status(folder));
+		try {
+			auto status = std::filesystem::status(folder);
+			return std::filesystem::is_directory(status);
+		}
+		catch (const std::exception& e) {
+			std::cout << e.what() << std::endl;
+		}
+
+		return false;
+	}
+
+	bool IsFile(const std::string& file) {
+		try {
+			auto status = std::filesystem::status(file);
+			return std::filesystem::is_regular_file(status);
+		}
+		catch(const std::exception& e) {
+			std::cout << e.what() << std::endl;
+		}
+
+		return false;
 	}
 
 	std::wstring GetAppDirectoryW() {
