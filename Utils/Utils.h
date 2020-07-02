@@ -22,7 +22,7 @@ namespace Util {
 	template<typename T, typename = std::enable_if_t<std::is_integral_v<T>>>
 	std::string HexString(T num) {
 		std::stringstream stream;
-		stream << "0x" << std::setfill('0') << std::setw(sizeof(T)*2) << std::hex << num;
+		stream << "0x" << std::setfill('0') << std::setw(sizeof(T) * 2) << std::hex << +static_cast<typename std::make_unsigned<T>::type>(num);
 		return stream.str();
 	}
 };
